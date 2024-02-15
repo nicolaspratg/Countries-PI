@@ -1,16 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "./Card.css"; // Import CSS file for styling
 
 const Card = ({ country }) => {
   return (
-    <div>
-      <div>
-        <img src={country.flagImage} alt="Flag" />
-        <div>
-          <h2>{country.name}</h2>
-          <p>Continent: {country.continent}</p>
+    <Link to={`/detail/${country.id}`} className="card-link">
+      <div className="card">
+        <div className="card-content">
+          <img src={country.flagImage} alt="Flag" className="card-image" />
+          <div className="card-text">
+            <h2 className="card-title">{country.name}</h2>
+            <p className="card-continent">Continent: {country.continent}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
