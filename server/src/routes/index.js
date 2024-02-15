@@ -8,12 +8,14 @@ const getCapitalByName = require("../controllers/getters/getCapitalByName");
 const getContinentCountries = require("../controllers/getters/getContinentCountries");
 const { getActivities } = require("../controllers/getters/getActivities");
 const { postActivities } = require("../controllers/setters/postActivities");
+const getCountriesWithoutSubregion = require("../controllers/getters/getCountriesWithoutSubRegion");
 
 router.get("/countries", getAllCountries);
 router.get("/countries/id/:idCountry", getCountryById);
-router.get("/countries/name/:name", getCountryByName);
-router.get("/countries/capital/:capitalName", getCapitalByName);
-router.get("/countries/continent/:continentName", getContinentCountries);
+router.get("/countries/name", getCountryByName);
+router.get("/countries/capital", getCapitalByName);
+router.get("/countries/continent", getContinentCountries);
+router.get("/countries/noSubregion", getCountriesWithoutSubregion);
 router.post("/activities", postActivities);
 router.get("/activities", getActivities);
 
