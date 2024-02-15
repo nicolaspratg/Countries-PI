@@ -11,6 +11,15 @@ module.exports.getCountryById = async (req, res) => {
       include: [{ model: Activity, attributes: ["name"] }], // Include associated activities
     });
 
+    if (!country.subregion) {
+      country.subregion = "No subregion has been specified";
+    }
+
+    // Check if area is null or 0
+    if (!country.area) {
+      country.area = "No area has been specified";
+    }
+
     // If country is found, send its details along with associated activities
     if (country) {
       res.json(country);
