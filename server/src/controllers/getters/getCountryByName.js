@@ -8,7 +8,7 @@ const getCountryByName = async (req, res) => {
     const countries = await Country.findAll({
       where: {
         name: {
-          [Op.iLike]: `%${name}%`,                      // find all countries that are like the one received by params
+          [Op.iLike]: `${name}%`,                      // find all countries that are like the one received by params
         },
       },
       include: {
