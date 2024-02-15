@@ -1,14 +1,14 @@
-const { Op } = require("sequelize");                    // For complex db ops
+const { Op } = require("sequelize"); // For complex db ops
 const { Country, Activity } = require("../../db");
 
 const getCountryByName = async (req, res) => {
   try {
-    const { name } = req.params;                        // extract country name from params
-    console.log("Searching for country:", name);
+    const { query } = req.query; // extract country query from params
+    console.log("Searching for country:", query);
     const countries = await Country.findAll({
       where: {
         name: {
-          [Op.iLike]: `${name}%`,                      // find all countries that are like the one received by params
+          [Op.iLike]: `${query}%`, // find all countries that are like the one received by params
         },
       },
       include: {
@@ -18,7 +18,9 @@ const getCountryByName = async (req, res) => {
         },
       },
     });
-    if (countries.length > 0) {                         // if at least one was found, return as a json
+
+    if (countries.length > 0) {
+      // if at least one was found, return as a json
       res.json(countries);
     } else {
       res.status(404).json({ message: "Country not found" });

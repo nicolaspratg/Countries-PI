@@ -3,12 +3,12 @@ const { Country, Activity } = require("../../db");
 
 const getContinentCountries = async (req, res) => {
   try {
-    const { continentName } = req.params;                 // extract continent name from params
-    console.log("Searching for country:", continentName);
+    const { query } = req.query;                 // extract continent name from params
+    console.log("Searching for country:", query);
     const continent = await Country.findAll({
       where: {
         continent: {
-          [Op.iLike]: `%${continentName}%`,               // find all continents that are like the one received by params
+          [Op.iLike]: `%${query}%`,               // find all continents that are like the one received by params
         },
       },
       include: {

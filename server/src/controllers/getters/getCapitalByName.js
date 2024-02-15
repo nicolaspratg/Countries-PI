@@ -3,12 +3,12 @@ const { Country, Activity } = require("../../db");
 
 const getCapitalByName = async (req, res) => {
   try {
-    const { capitalName } = req.params;                 // extract capital name from params
-    console.log("Searching for country:", capitalName);
+    const { query } = req.query;                 // extract capital name from params
+    console.log("Searching for country:", query);
     const capital = await Country.findAll({
       where: {
         capital: {
-          [Op.iLike]: `%${capitalName}%`,               // find all capitals like the one received from params
+          [Op.iLike]: `%${query}%`,               // find all capitals like the one received from params
         },
       },
       include: {
