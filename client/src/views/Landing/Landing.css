@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.landing-container {
+  background-image: url("../../assets/backgrounds/bg-globe.jpg");
+  /* background-position: center center; */
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
