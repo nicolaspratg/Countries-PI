@@ -1,20 +1,26 @@
-import { GET_ALL_COUNTRIES } from "./actions";
+import { GET_ALL_COUNTRIES, SEARCH_COUNTRY } from "./actions";
 
 const initialState = {
   allCountries: [],
-  myCountries: [],
+  searchResults: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ALL_COUNTRIES:
-      console.log("Payload at Reducer:", payload);
-      const aux = payload; // hold payload in aux
+      // console.log("Payload at Reducer:", payload);
       return {
         ...state,
-        allCountries: aux, // update countries with payload
-        myCountries: [...aux], // copy of payload
+        allCountries: payload,
       };
+    case SEARCH_COUNTRY:
+      const searchedCountries = payload; // Assuming payload is the searched country object
+
+      return {
+        ...state,
+        searchResults: searchedCountries,
+      };
+
     default:
       return state; // default return state unchanged
   }
