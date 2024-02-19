@@ -1,12 +1,10 @@
 // Cards.jsx
 import React from "react";
-import { useSelector } from "react-redux";
-import Card from "../Card/Card"; // Assuming Card component is in the same directory
+import Card from "../Card"; // Assuming Card component is in the same directory
 import "./Cards.css";
 import usePagination from "../../Custom Hooks/usePagination"; // custom hook to separate the logic and modularize
 
-const Cards = () => {
-  const countries = useSelector((state) => state.allCountries); //
+const Cards = ({ countries }) => {
   const { currentPage, currentItems, nextPage, prevPage, totalPages } =
     usePagination(countries, 10);
 
