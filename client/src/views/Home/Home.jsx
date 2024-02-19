@@ -6,6 +6,8 @@ import Cards from "../../components/Cards/Cards";
 const Home = () => {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.allCountries);
+  const searchResults = useSelector((state) => state.searchResults);
+  const toShow = searchResults.length > 0 ? searchResults : countries;
   useEffect(() => {
     dispatch(getAllCountries());
   }, [dispatch]);
@@ -14,7 +16,7 @@ const Home = () => {
       <div>
         <p>Home page</p>
         <div>
-          <Cards countries={countries} />
+          <Cards countries={toShow} />
         </div>
       </div>
     </div>
