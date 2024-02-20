@@ -2,6 +2,9 @@ import axios from "axios";
 // action.type
 export const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
 export const SEARCH_COUNTRY = "SEARCH_COUNTRY";
+export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
+export const FILTER_ACTIVITIES = "FILTER_ACTIVITIES";
+export const ORDER_CARDS = "ORDER_CARDS";
 
 const endpointURL = "http://localhost:3001/";
 
@@ -35,5 +38,24 @@ export const searchCountry = (country) => {
       console.log("Action - Error:", error.response);
       alert(error.message);
     }
+  };
+};
+
+export const filterByContinent = (continent) => {
+  return {
+    type: FILTER_BY_CONTINENT,
+    payload: continent,
+  };
+};
+export const orderCards = (order) => {
+  return {
+    type: ORDER_CARDS,
+    payload: { attribute, order },
+  };
+};
+export const filterActivities = (activity) => {
+  return {
+    type: FILTER_ACTIVITIES,
+    payload: activity,
   };
 };
