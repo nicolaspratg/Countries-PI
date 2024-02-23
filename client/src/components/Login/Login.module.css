@@ -1,0 +1,54 @@
+.formContainer {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 10px rgba(0, 0, 0, 0.1);
+  background: rgb(37 35 34 / 75%);
+  backdrop-filter: blur(3px);
+}
+
+.loginInput {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+}
+.loginInput:focus {
+  outline: none;
+}
+
+/* body {
+  margin: 0;
+  padding: 0;
+}
+
+body .errorText {
+  color: #ffffffe0;
+  margin: 5px 0;
+} */
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  color: #fff;
+  background-color: #1a1a1aa1;
+  cursor: pointer;
+  transition: color 1s ease-in-out, background-color 0.3s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.submitButton:hover {
+  background-color: #e8772bc7;
+}
+.formText {
+  color: #ffffffe0;
+}
+
+@media (max-width: 600px) {
+  .form-container form {
+    width: 80%;
+  }
+}
