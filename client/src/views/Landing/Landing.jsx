@@ -1,14 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import "./Landing.css";
+import React from "react";
+import Login from "../../components/Login/Login";
+import styles from "./Landing.module.css";
+
 const Landing = () => {
-  const navigate = useNavigate();
   return (
-    <div className="landing-container">
-      {/* <div className="content-container"> */}
-      <button onClick={() => navigate("/home")}>
-        Welcome to my countries app
-      </button>
-      {/* </div> */}
+    <div className={styles.landingContainer}>
+      <div className={styles.contentContainer}>
+        <h1 className={styles.title}>Countries Individual Project</h1>
+        <div className={styles.loginSection}>
+          <Login />
+        </div>
+      </div>
     </div>
   );
 };
