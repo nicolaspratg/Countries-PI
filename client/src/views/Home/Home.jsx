@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByContinent, getAllCountries } from "../../redux/actions";
+import { Nav } from "../../components/Nav/Navbar";
+import {
+  filterByContinent,
+  getAllCountries,
+  sortCountries,
+} from "../../redux/actions";
 import Cards from "../../components/Cards/Cards";
 
 const Home = () => {
+  const refOrder = useRef(null);
+  const refFilter = useRef(null);
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.allCountries);
   const searchResults = useSelector((state) => state.searchResults);
@@ -14,6 +21,14 @@ const Home = () => {
       : filteredResults.length > 0
       ? filteredResults
       : countries;
+  const showSearch = () => {
+    if (searchResults.length > 0) return searchResults;
+    return countries;
+  };
+  const filterResults = () => {
+    if (filteredResults.length > 0) return filteredResults;
+    return showSearch();
+  };
 
   // const [filter, setFilter] = useState("");
   // const [order, setOrder] = useState("");
@@ -28,67 +43,68 @@ const Home = () => {
   const handleOrder = (e) => {
     dispatch(handleOrder(e.target.value));
   };
+  const handleSortCountries = (e) => {
+    dispatch(sortCountries(e.target.value));
+  };
   // const filterActivities = (e) => {
   //   dispatch(filterActivities(e.target.value));
   // };
 
   const resetFilters = () => {
     dispatch(filterByContinent("All"));
+    refFilter.current.value = "";
+    refOrder.current.value = "";
   };
   return (
     <div>
       <div>
+        <Nav />
         <p>Home page</p>
-        <div>
-          <select name="order" onChange={handleOrder}>
-            <option value="" disabled>
-              Select Order
-            </option>
-            <optgroup label="Country">
-              <option value="Country Name">Name ^ A-Z</option>
-              <option value="Capital">Capital ^ A-Z</option>
-              <option value="Subregion">Subregion ^ A-Z</option>
-              <option value="Population">Population ^ 0-ထ</option>
-              <option value="Area">Area ^ 0-ထ</option>
-            </optgroup>
-            {/* <optgroup label="Activity (The first in each country)">
-        <option value="Activity Name">Name ^ A-Z</option>
-        <option value="Difficulty">Difficulty ^ 1-5</option>
-        <option value="Duration">Duration ^ 0-ထ</option>
-        <option value="Season">Season ^ A-Z</option>
-      </optgroup> */}
-          </select>
-          <select name="filter" onChange={handleFilterByContinent}>
-            <option value="" disabled>
-              Select Filter
-            </option>
-            <optgroup label="Country Continents">
+        <form action="">
+          <div>
+            <label htmlFor="Select Order">Select Order</label>
+            <select
+              ref={refOrder}
+              name="order"
+              onChange={handleSortCountries}
+              id="Select Order"
+            >
               <option value="All">All</option>
-              <option value="Africa">Africa</option>
-              <option value="Antarctic">Antarctic</option>
-              <option value="Asia">Asia</option>
-              <option value="Europe">Europe</option>
-              <option value="Oceania">Oceania</option>
-              <option value="Americas">America</option>
-            </optgroup>
-            {/* <optgroup label="Activity Difficults">
-          <option value="Difficulty 1">Difficulty 1</option>
-          <option value="Difficulty 2">Difficulty 2</option>
-          <option value="Difficulty 3">Difficulty 3</option>
-          <option value="Difficulty 4">Difficulty 4</option>
-          <option value="Difficulty 5">Difficulty 5</option>
-        </optgroup>
-        <optgroup label="Activity Season">
-          <option value="Summer">Summer</option>
-          <option value="Autumn">Autumn</option>
-          <option value="Winter">Winter</option>
-          <option value="Spring">Spring</option>
-        </optgroup> */}
-          </select>
-          <button onClick={resetFilters}>Reset Filters</button>
-        </div>
+              <optgroup label="Order by name">
+                <option value="Ascending">Name A-Z</option>
+                <option value="Descending">Name Z-A</option>
+              </optgroup>
+              <optgroup label="Order by population">
+                <option value="MaxPop">Max Pop</option>
+                <option value="MinPop">Min Pop</option>
+              </optgroup>
+              <optgroup label="Order by area">
+                <option value="MaxArea">Max Area</option>
+                <option value="MinArea">Min Area</option>
+              </optgroup>
+            </select>
+            <label htmlFor="Select Filter">Select Filter</label>
+            <select
+              ref={refFilter}
+              name="filter"
+              onChange={handleFilterByContinent}
+              id="Select Filter"
+            >
+              <optgroup label="Continents">
+                <option value="All">All</option>
+                <option value="Africa">Africa</option>
+                <option value="Antarctic">Antarctic</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="Oceania">Oceania</option>
+                <option value="Americas">America</option>
+              </optgroup>
+            </select>
+            <button onClick={resetFilters}>Reset Filters</button>
+          </div>
+        </form>
         <div>
-          <Cards countries={toShow} />
+          <Cards countries={filterResults()} />
         </div>
       </div>
     </div>
