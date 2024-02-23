@@ -5,6 +5,8 @@ export const SEARCH_COUNTRY = "SEARCH_COUNTRY";
 export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
 export const FILTER_ACTIVITIES = "FILTER_ACTIVITIES";
 export const ORDER_CARDS = "ORDER_CARDS";
+export const SORT_COUNTRIES = "SORT_COUNTRIES";
+export const SELECT_COUNTRIES = "SELECT_COUNTRIES";
 
 const endpointURL = "http://localhost:3001/";
 
@@ -57,5 +59,18 @@ export const filterActivities = (activity) => {
   return {
     type: FILTER_ACTIVITIES,
     payload: activity,
+  };
+};
+export const sortCountries = (order) => {
+  return {
+    type: SORT_COUNTRIES,
+    payload: order,
+  };
+};
+
+export const selectCountry = (country) => {
+  return {
+    type: SELECT_COUNTRIES,
+    payload: country,
   };
 };
