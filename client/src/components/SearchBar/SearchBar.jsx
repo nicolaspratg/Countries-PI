@@ -1,38 +1,38 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux"; // Import useDispatch hook
-import { searchCountry } from "../../redux/actions"; // Import your searchCountry action
+import { useDispatch } from "react-redux";
+import { searchCountry } from "../../redux/actions";
 import "./SearchBar.css";
+import { NavLink } from "react-router-dom";
 
 export const SearchBar = () => {
-  const dispatch = useDispatch(); // Get the dispatch function
+  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchedTerm, setSearchedTerm] = useState(""); // New state to store the searched term
 
   const handleSearch = (term) => {
-    dispatch(searchCountry(term));
-    setSearchedTerm(term); // Update the searched term
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    handleSearch(searchTerm); // Dispatch the searchCountry action with the searchTerm
-    setSearchTerm(""); // Clear the input field
+    dispatch(searchCountry(term)); // if hay filtered results dispatch searchFilteredResults (action nuevo) sino busco del back
   };
 
   const onChange = (e) => {
-    setSearchTerm(e.target.value);
+    const { value } = e.target;
+    setSearchTerm(value); // Update the search term state
+
+    // Dispatch the search action with the updated search term
+    handleSearch(value);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Enter any country name"
-        value={searchTerm}
-        onChange={onChange}
-      />
-      <button type="submit">Search</button>
-      {searchedTerm && <h1>Search Results for: {searchedTerm}</h1>}{" "}
-    </form>
+    <div>
+      <form>
+        <input
+          type="text"
+          placeholder="Enter any country name"
+          value={searchTerm}
+          onChange={onChange}
+        />
+      </form>
+      <NavLink to="/form">
+        <button>Form</button>
+      </NavLink>
+    </div>
   );
 };
