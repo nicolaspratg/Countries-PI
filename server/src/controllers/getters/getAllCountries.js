@@ -2,10 +2,13 @@ const { Country, Activity } = require("../../db");
 
 module.exports.getAllCountries = async (req, res) => {
   try {
-    console.log("Controller function getAllCountries invoked");   // debug purposes
+    console.log("Controller function getAllCountries invoked");
 
-    const countries = await Country.findAll({                     // finds all and returns an array of obj
-      include: Activity,                                          // includes Activities of countries
+    const countries = await Country.findAll({
+      include: {
+        model: Activity, // Specify the associated model
+        as: "activities", // Use the alias specified in the association
+      },
     });
     res.json(countries);
   } catch (error) {

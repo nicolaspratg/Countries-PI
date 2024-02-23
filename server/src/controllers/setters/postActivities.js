@@ -2,26 +2,44 @@ const { Activity, Country } = require("../../db");
 
 module.exports.postActivities = async (req, res) => {
   try {
-    const { name, difficulty, duration, season, countries } = req.body;       // extracts necessary info to create an activity from req.body
-    const newActivity = await Activity.create({                               // creates a new activity in the Activity table using sql .create
+    const { name, difficulty, duration, season, countriesId } = req.body; // extracts necessary info to create an activity from req.body
+    const newActivity = await Activity.create({
+      // creates a new activity in the Activity table using sql .create
       name,
       difficulty,
       duration,
       season,
-      countries
+      countries: countriesId,
     });
-    console.log(newActivity);
-    if (countries && countries.length > 0) {                                  // if there are countries assoicated with this activity
-      const associatedCountries = await Country.findAll({                     // ??
-        where: {
-          id: countries,
-        },
+    let countriesFound = [];
+
+    for (const countryId of countriesId) {
+      console.log("country Name", countryId);
+      const countryFound = await Country.findOne({
+        where: { id: countryId },
       });
-
-      await newActivity.setCountries(associatedCountries);                    // ??
+      countryFound && countriesFound.push(countryFound);
     }
+    console.log("countries found", countriesFound);
 
-    res.status(201).json(newActivity);
+    await newActivity.addCountry(countriesFound);
+
+    const ActivityBd = await Activity.findOne({
+      where: {
+        name: newActivity.name,
+      },
+      include: {
+        model: Country,
+        as: "countries",
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+        order: [["ASC"]],
+      },
+    });
+
+    res.status(201).json([ActivityBd]);
   } catch (error) {
     res
       .status(500)

@@ -13,6 +13,7 @@ const getContinentCountries = async (req, res) => {
       },
       include: {
         model: Activity,
+        as: "activities",
         through: {
           attributes: [],
         },
