@@ -20,3 +20,8 @@ export function validatePassword(password) {
     ? "Invalid password format. Must contain at least one digit"
     : null;
 }
+
+export const allowedUser = {
+  email: "ndepratg@gmail.com",
+  password: "n0trichyet",
+};
