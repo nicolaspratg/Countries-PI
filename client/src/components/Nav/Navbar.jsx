@@ -1,11 +1,9 @@
 import { SearchBar } from "../SearchBar/SearchBar";
-import "./Navbar.css";
-
+import styles from './Navbar.module.css'
 export const Nav = () => {
   return (
-    <div>
+    <div className={styles.nav}>
       <SearchBar />
-      <button>Logout</button>
     </div>
   );
 };
