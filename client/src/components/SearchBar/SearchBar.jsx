@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchCountry } from "../../redux/actions";
-import "./SearchBar.css";
+import styles from "./SearchBar.module.css"; // Import CSS Modules styles
 import { NavLink } from "react-router-dom";
 
 export const SearchBar = () => {
@@ -9,29 +9,38 @@ export const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (term) => {
-    dispatch(searchCountry(term)); // if hay filtered results dispatch searchFilteredResults (action nuevo) sino busco del back
+    dispatch(searchCountry(term));
   };
 
   const onChange = (e) => {
     const { value } = e.target;
-    setSearchTerm(value); // Update the search term state
-
-    // Dispatch the search action with the updated search term
+    setSearchTerm(value);
     handleSearch(value);
   };
 
   return (
-    <div>
-      <form>
-        <input
-          type="text"
-          placeholder="Enter any country name"
-          value={searchTerm}
-          onChange={onChange}
-        />
-      </form>
+    <div className={styles.container}>
+      <NavLink to="/home">
+        <button className={styles.searchBarBtns}>Home</button>
+      </NavLink>
+      <NavLink to="/about">
+        <button className={styles.searchBarBtns}>About</button>
+      </NavLink>
+      <input
+        className={styles.searchInput}
+        type="text"
+        placeholder="Enter any country name"
+        value={searchTerm}
+        onChange={onChange}
+      />
       <NavLink to="/form">
-        <button>Form</button>
+        <button className={styles.searchBarBtns}>Create Activity</button>
+      </NavLink>
+      <NavLink to="/activities">
+        <button className={styles.searchBarBtns}>Activities</button>
+      </NavLink>
+      <NavLink to="/">
+        <button className={styles.logOutBtn}>Logout</button>
       </NavLink>
     </div>
   );
