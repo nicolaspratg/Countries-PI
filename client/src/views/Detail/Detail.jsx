@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./Detail.css";
+import styles from "./Detail.module.css";
 
 function formatNumber(number) {
   return number
@@ -28,30 +28,70 @@ const Detail = () => {
   }, [id]);
 
   return (
-    <div className="detailBody">
-      <div>
-        <h1>{country.name}</h1>
-        <h2>ID: {country.id}</h2>
-        {country.flagImage && (
-          <img src={country.flagImage} alt={country.name} />
-        )}
-        <h2>Capital: {country.capital} </h2>
-        <h2>Continent: {country.continent} </h2>
-        <h2>
-          Subregion:{" "}
-          {country.subregion === "No subregion has been specified"
-            ? "No subregion has been specified"
-            : country.subregion}
-        </h2>
-        <h2>
-          Area:{" "}
-          {formatNumber(
-            country.area === null
-              ? "No area has been specified"
-              : `${country.area}km²`
-          )}
-        </h2>
-        <h2>Population: {formatNumber(country.population)} </h2>
+    <div className={styles.detailContainer}>
+      <div className={styles.detailBody}>
+        <div className={styles.countryInfo}>
+          <div className={styles.flagContainer}>
+            {country.flagImage && (
+              <img
+                src={country.flagImage}
+                alt={country.name}
+                className={styles.flagImage}
+              />
+            )}{" "}
+            <div>
+              <h1>{country.name}</h1>
+            </div>
+            <div>
+              <h2>Capital:</h2>
+              <p>{country.capital}</p>
+            </div>
+          </div>
+          <div className={styles.details}>
+            <div>
+              <h2>Continent:</h2>
+              <p>{country.continent}</p>
+            </div>
+            <div>
+              <h2>Subregion:</h2>
+              <p>
+                {country.subregion === "No subregion has been specified"
+                  ? "No subregion has been specified"
+                  : country.subregion}
+              </p>
+            </div>
+            <div>
+              <h2>Area:</h2>
+              <p>
+                {formatNumber(
+                  country.area === null
+                    ? "No area has been specified"
+                    : `${country.area}km²`
+                )}
+              </p>
+            </div>
+            <div>
+              <h2>Population:</h2>
+              <p>{formatNumber(country.population)}</p>
+            </div>
+            <div>
+              <h2>
+                {country.activities && country.activities.length > 0 ? (
+                  <strong>Activities:</strong>
+                ) : (
+                  "Activities:"
+                )}
+              </h2>
+              {country.activities && country.activities.length > 0 && (
+                <p>
+                  {country.activities
+                    .map((activity) => activity.name)
+                    .join(", ")}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
