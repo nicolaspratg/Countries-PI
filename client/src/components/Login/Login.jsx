@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { validateEmail, validatePassword } from "../../validations";
 import styles from "./Login.module.css";
 
-export default function Login({ login }) {
+export default function Login() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
-
   const [errors, setErrors] = useState({ email: "", password: "" });
 
   const handleChange = (event) => {
@@ -23,24 +21,25 @@ export default function Login({ login }) {
 
     if (name === "email") {
       const error = validateEmail(value);
-
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: error,
-      }));
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
     } else if (name === "password") {
       const error = validatePassword(value);
-
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: error,
-      }));
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(userData);
+
+    // Simulate authentication (replace with actual authentication logic)
+    if (
+      userData.email === "ndepratg@gmail.com" &&
+      userData.password === "n0trichyet"
+    ) {
+      navigate("/home");
+    } else {
+      alert("Invalid credentials. Please try again.");
+    }
   };
 
   return (
@@ -81,11 +80,7 @@ export default function Login({ login }) {
               <p className={styles.errorText}>{errors.password}</p>
             )}
           </div>
-          <button
-            type="submit"
-            className={styles.submitButton}
-            onClick={() => navigate("/home")}
-          >
+          <button type="submit" className={styles.submitButton}>
             Submit
           </button>
         </form>

@@ -41,7 +41,7 @@ body .errorText {
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .submitButton:hover {
-  background-color: #e8772bc7;
+  background-color: #c7bfb0;
 }
 .formText {
   color: #ffffffe0;
@@ -51,4 +51,8 @@ body .errorText {
   .form-container form {
     width: 80%;
   }
+}
+
+.errorText {
+  color: rgb(255, 255, 255); /* Change to the desired font color */
 }
