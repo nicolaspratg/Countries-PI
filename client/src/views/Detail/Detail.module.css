@@ -11,11 +11,13 @@
 }
 
 .detailBody {
-  background-color: #ffffffe8;
+  background-color: #ffffffb3; /* Adjust background color */
+  backdrop-filter: blur(3px);
   border-radius: 10px;
   padding: 20px;
   display: flex;
   justify-content: center;
+  width: 400px;
 }
 
 .countryInfo {
@@ -58,10 +60,9 @@
 .flagContainer {
   width: 200px; /* Set your desired width */
   height: 300px; /* Set your desired height */
-  overflow: hidden;
 }
 
 .flagImage {
-  width: 100%;
-  height: auto;
+  width: auto;
+  max-height: 200px;
 }
