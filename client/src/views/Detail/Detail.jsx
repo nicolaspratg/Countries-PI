@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
 
 function formatNumber(number) {
@@ -83,11 +83,13 @@ const Detail = () => {
                 )}
               </h2>
               {country.activities && country.activities.length > 0 && (
-                <p>
-                  {country.activities
-                    .map((activity) => activity.name)
-                    .join(", ")}
-                </p>
+                <NavLink to="/activities" className={styles.link}>
+                  <p>
+                    {country.activities
+                      .map((activity) => activity.name)
+                      .join(", ")}
+                  </p>
+                </NavLink>
               )}
             </div>
           </div>
