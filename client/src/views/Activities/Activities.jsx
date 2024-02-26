@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ActivityCards from "../../components/Cards/Activity Cards";
-import { NavLink } from "react-router-dom";
+import styles from "./Activities.module.css";
 import axios from "axios";
 
 const URL = "http://localhost:3001/activities";
@@ -23,10 +23,7 @@ const Activities = () => {
   }, []);
 
   return (
-    <div>
-      <NavLink to="/form">
-        <button>←</button>
-      </NavLink>
+    <div className={styles.container}>
       <ActivityCards activities={activities} />
     </div>
   );
