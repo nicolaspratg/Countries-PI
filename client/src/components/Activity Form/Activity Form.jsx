@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCountries, selectCountry } from "../../redux/actions";
 import validateField from "./validate";
+import styles from "./Activity Form.module.css";
 
 const URL = "http://localhost:3001/activities";
 
@@ -107,94 +108,108 @@ const ActivityForm = () => {
   };
 
   return (
-    <div>
-      {!created ? (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={activityValues.name}
-              onChange={handleChange}
-            />
-            {errors.name && <span>{errors.name}</span>}
-          </div>
-          <div>
-            <label htmlFor="difficulty">Select difficulty:</label>
-            <select
-              name="difficulty"
-              value={activityValues.difficulty}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select difficulty
-              </option>
-              <option value="1">Difficulty 1</option>
-              <option value="2">Difficulty 2</option>
-              <option value="3">Difficulty 3</option>
-              <option value="4">Difficulty 4</option>
-              <option value="5">Difficulty 5</option>
-            </select>
-            {errors.difficulty && <span>{errors.difficulty}</span>}
-          </div>
-          <div>
-            <label htmlFor="duration">Duration (hr):</label>
-            <input
-              type="number"
-              name="duration"
-              value={activityValues.duration}
-              onChange={handleChange}
-            />
-            {errors.duration && <span>{errors.duration}</span>}
-          </div>
-          <div>
-            <label htmlFor="season">Select season:</label>
-            <select
-              name="season"
-              value={activityValues.season}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select season
-              </option>
-              <option value="Summer">Summer</option>
-              <option value="Autumn">Autumn</option>
-              <option value="Winter">Winter</option>
-              <option value="Spring">Spring</option>
-            </select>
-            {errors.season && <span>{errors.season}</span>}
-          </div>
-          <div>
-            <label htmlFor="countries">Select country/es: </label>
-            <select
-              name="countries"
-              value={activityValues.countriesId}
-              onChange={handleChangeCountries}
-              multiple
-            >
-              <option value="" disabled>
-                Select country/es
-              </option>
-              {countriesCopied.map((country) => (
-                <option
-                  onClick={() => console.log("Country ID:", country.id)}
-                  value={country.id}
-                  key={country.id}
-                >
-                  {country.name}
+    <div className={styles.bg}>
+      <div className={styles.formContainer}>
+        <h1>Create Tourist Activity</h1>
+        {!created ? (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Name:</label>
+              <input
+                className={styles.formInput}
+                type="text"
+                name="name"
+                value={activityValues.name}
+                onChange={handleChange}
+                placeholder="Name your activity"
+                // autoComplete="off"
+              />
+              {errors.name && <p>{errors.name}</p>}
+            </div>
+            <div>
+              <label className={styles.formLabel} htmlFor="difficulty">
+                Select difficulty:
+              </label>
+              <select
+                className={styles.formSelect}
+                name="difficulty"
+                value={activityValues.difficulty}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
+                  Difficulty
                 </option>
-              ))}
-            </select>
-            {errors.countriesId && <span>{errors.countriesId}</span>}
-          </div>
-          <button type="submit">Create</button>
-        </form>
-      ) : (
-        <button onClick={handleClick}>
-          Do you want to create another activity?
-        </button>
-      )}
+                <option value="1">Difficulty 1 (Easy)</option>
+                <option value="2">Difficulty 2 (Easy - Medium)</option>
+                <option value="3">Difficulty 3 (Medium)</option>
+                <option value="4">Difficulty 4 (Medium - Hard)</option>
+                <option value="5">Difficulty 5 (Hard)</option>
+              </select>
+              {errors.difficulty && <p>{errors.difficulty}</p>}
+            </div>
+            <div>
+              <label htmlFor="duration">Duration (hr):</label>
+              <input
+                className={styles.formInput}
+                type="number"
+                name="duration"
+                value={activityValues.duration}
+                onChange={handleChange}
+                placeholder="How long did it last?"
+              />
+              {errors.duration && <span>{errors.duration}</span>}
+            </div>
+            <div>
+              <label htmlFor="season">Select season:</label>
+              <select
+                className={styles.formSelect}
+                name="season"
+                value={activityValues.season}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
+                  Select season
+                </option>
+                <option value="Summer">Summer</option>
+                <option value="Autumn">Autumn</option>
+                <option value="Winter">Winter</option>
+                <option value="Spring">Spring</option>
+              </select>
+              {errors.season && <span>{errors.season}</span>}
+            </div>
+            <div>
+              <label htmlFor="countries">Select country/es: </label>
+              <select
+                className={styles.formSelect}
+                name="countries"
+                value={activityValues.countriesId}
+                onChange={handleChangeCountries}
+                multiple
+              >
+                {countriesCopied.map((country) => (
+                  <option
+                    onClick={() => console.log("Country ID:", country.id)}
+                    value={country.id}
+                    key={country.id}
+                  >
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+              {errors.countriesId && <span>{errors.countriesId}</span>}
+            </div>
+            <div className={styles.formButtonContainer}>
+              <button className={styles.formButton} type="submit">
+                Create Activity
+              </button>
+            </div>
+          </form>
+        ) : (
+          <button className={styles.formButton} onClick={handleClick}>
+            Do you want to create another activity?
+          </button>
+        )}
+      </div>
     </div>
   );
 };
