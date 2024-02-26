@@ -1,17 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Card.css"; // Import CSS file for styling
+import styles from "./Card.module.css"; // Import CSS file for styling
 
 const Card = ({ country }) => {
   return (
     <div>
-      <Link to={`/detail/${country.id}`} className="card-link">
-        <div className="card">
-          <div className="card-content">
-            <img src={country.flagImage} alt="Flag" className="card-image" />
-            <div className="card-text">
-              <h2 className="card-title">{country.name}</h2>
-              <p className="card-continent">Continent: {country.continent}</p>
+      <Link to={`/detail/${country.id}`} className={styles.cardLink}>
+        <div className={styles.card}>
+          <div className={styles.cardContent}>
+            <img
+              src={country.flagImage}
+              alt="Flag"
+              className={styles.cardImage}
+            />
+            <div className={styles.cardText}>
+              <h2 className={styles.cardTitle}>{country.name}</h2>
+              <p className={styles.cardSubText}>
+                <strong>Continent:</strong> {country.continent}
+              </p>
+              <p className={styles.cardSubText}><strong>Capital:</strong> {country.capital}</p>
             </div>
           </div>
         </div>
