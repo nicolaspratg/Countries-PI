@@ -48,8 +48,9 @@
 .pagination button {
   padding: 8px 16px;
   margin: 0 5px;
-  background-color: #1a1a1aa1;
-  color: #ffffff;
+  background-color: #ffffffb3; /* Adjust background color */
+  backdrop-filter: blur(3px);
+  color: #000000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -58,4 +59,13 @@
 
 .pagination button:hover {
   transform: scale(1.06);
+}
+
+.pagNum {
+  color: white;
+  background-color: #ffffffb3; /* Adjust background color */
+  backdrop-filter: blur(3px);
+  color: #000000;
+  border-radius: 4px;
+  padding: 7px 16px;
 }

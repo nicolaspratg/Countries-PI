@@ -89,7 +89,7 @@ const ActivityCards = ({ activities }) => {
         <button onClick={prevPage} disabled={currentPage === 1}>
           Previous
         </button>
-        <span>
+        <span className={styles.pagNum}>
           Page {currentPage} of {totalPages}
         </span>
         <button onClick={nextPage} disabled={currentPage === totalPages}>
