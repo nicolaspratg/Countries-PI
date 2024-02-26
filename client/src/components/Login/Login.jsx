@@ -36,7 +36,7 @@ export default function Login() {
       userData.email === "ndepratg@gmail.com" &&
       userData.password === "n0trichyet"
     ) {
-      navigate("/home");
+      navigate("/about");
     } else {
       alert("Invalid credentials. Please try again.");
     }
