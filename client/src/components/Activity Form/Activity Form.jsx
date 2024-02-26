@@ -104,7 +104,7 @@ const ActivityForm = () => {
       season: "",
       countriesId: "",
     });
-    setCreated(false);
+    setCreated(true);
   };
 
   return (
