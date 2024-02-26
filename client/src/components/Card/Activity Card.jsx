@@ -1,20 +1,36 @@
-/* eslint-disable react/prop-types */
-
+import React from "react";
+import styles from "./Activity Card.module.css";
 const ActivityCard = ({ activity }) => {
   const { name, difficulty, duration, season, countries } = activity;
 
   return (
-    <div>
+    <div className={styles.activityCard}>
       <h2>{name}</h2>
-      <h4>Difficulty: {difficulty}</h4>
-      <h4>Duration: {duration}</h4>
-      <h4>Season: {season}</h4>
-      <h4>Countries:</h4>
-      <ul>
-        {countries?.map((country, index) => (
-          <li key={index}>{country.name}</li>
-        ))}
-      </ul>
+      <div className={styles.details}>
+        <div>
+          <h4>Difficulty:</h4>
+          <p>{difficulty}</p>
+        </div>
+        <div>
+          <h4>Duration:</h4>
+          <p>{duration}hs</p>
+        </div>
+        <div>
+          <h4>Season:</h4>
+          <p>{season}</p>
+        </div>
+      </div>
+      <div>
+        <h4 className={styles.countriesMargin}>Countries:</h4>
+        <p className={styles.pMargin}>
+          {countries?.map((country, index) => (
+            <React.Fragment key={index}>
+              {country.name}
+              {index !== countries.length - 1 && ", "}
+            </React.Fragment>
+          ))}
+        </p>
+      </div>
     </div>
   );
 };
