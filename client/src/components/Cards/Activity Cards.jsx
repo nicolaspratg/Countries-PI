@@ -13,27 +13,27 @@ const ActivityCards = ({ activities }) => {
   const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order is ascending
 
   const filteredActivities = activities
-    .filter((activity) => {
-      const nameMatches = activity.name
-        .toLowerCase()
-        .includes(filters.name.toLowerCase());
-      const difficultyMatches =
-        filters.difficulty === "" ||
-        parseInt(activity.difficulty, 10) === parseInt(filters.difficulty, 10);
-      return nameMatches && difficultyMatches;
-    })
-    .sort((a, b) => {
-      const nameA = a.name.toLowerCase();
-      const nameB = b.name.toLowerCase();
+  //   .filter((activity) => {
+  //     const nameMatches = activity.name
+  //       .toLowerCase()
+  //       .includes(filters.name.toLowerCase());
+  //     const difficultyMatches =
+  //       filters.difficulty === "" ||
+  //       parseInt(activity.difficulty, 10) === parseInt(filters.difficulty, 10);
+  //     return nameMatches && difficultyMatches;
+  //   })
+  //   .sort((a, b) => {
+  //     const nameA = a.name.toLowerCase();
+  //     const nameB = b.name.toLowerCase();
 
-      // Determine the sorting order based on the selected option
-      const compareResult =
-        sortOrder === "asc"
-          ? nameA.localeCompare(nameB)
-          : nameB.localeCompare(nameA);
+  //     // Determine the sorting order based on the selected option
+  //     const compareResult =
+  //       sortOrder === "asc"
+  //         ? nameA.localeCompare(nameB)
+  //         : nameB.localeCompare(nameA);
 
-      return compareResult;
-    });
+  //     return compareResult;
+  //   });
 
   const { currentPage, currentItems, nextPage, prevPage, totalPages } =
     usePagination(filteredActivities, 6);

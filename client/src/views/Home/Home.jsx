@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterByContinent,
+  getActivitiesNames,
   getAllCountries,
   sortCountries,
 } from "../../redux/actions";
@@ -16,7 +17,9 @@ const Home = () => {
   const countries = useSelector((state) => state.allCountries);
   const searchResults = useSelector((state) => state.searchResults);
   const filteredResults = useSelector((state) => state.filteredResults);
-
+  const activityNames = useSelector((state) =>
+    state.activityNames.map((activity) => activity.name)
+  );
   const showSearch = () => {
     if (searchResults.length > 0) return searchResults;
     return countries;
@@ -26,10 +29,13 @@ const Home = () => {
     return showSearch();
   };
 
-  // const [filter, setFilter] = useState("");
-  // const [order, setOrder] = useState("");
+  // const filterActivities = () => {
+  //   if (activityNames.length > 0) return activityNames;
+  //   return filterResults;
+  // };
   useEffect(() => {
     dispatch(getAllCountries());
+    dispatch(getActivitiesNames());
   }, [dispatch]);
   const handleFilterByContinent = (e) => {
     const value = e.target.value;
@@ -42,9 +48,6 @@ const Home = () => {
   const handleSortCountries = (e) => {
     dispatch(sortCountries(e.target.value));
   };
-  // const filterActivities = (e) => {
-  //   dispatch(filterActivities(e.target.value));
-  // };
 
   const resetFilters = () => {
     dispatch(filterByContinent("All"));
@@ -57,7 +60,9 @@ const Home = () => {
         <form>
           <div>
             <div className={styles.filterSection}>
-              <label className={styles.filterLabels} htmlFor="Select Order">Select Order</label>
+              <label className={styles.filterLabels} htmlFor="Select Order">
+                Select Order
+              </label>
               <select
                 className={styles.filterSelect}
                 ref={refOrder}
@@ -79,7 +84,9 @@ const Home = () => {
                   <option value="MinArea">Min Area</option>
                 </optgroup>
               </select>
-              <label className={styles.filterLabels} htmlFor="Select Filter">Select Continent</label>
+              <label className={styles.filterLabels} htmlFor="Select Filter">
+                Select Continent
+              </label>
               <select
                 className={styles.filterSelect}
                 ref={refFilter}
@@ -96,6 +103,15 @@ const Home = () => {
                   <option value="Oceania">Oceania</option>
                   <option value="Americas">America</option>
                 </optgroup>
+              </select>
+              <label className={styles.filterLabels} htmlFor="">
+                Select Activities
+              </label>
+              <select name="" id="" className={styles.filterSelect}>
+                <option value="All">All</option>
+                {activityNames.map((activity) => (
+                  <option key={activity}>{activity}</option>
+                ))}
               </select>
               <button className={styles.filterResetBtn} onClick={resetFilters}>
                 <img

@@ -7,6 +7,7 @@ export const FILTER_ACTIVITIES = "FILTER_ACTIVITIES";
 export const ORDER_CARDS = "ORDER_CARDS";
 export const SORT_COUNTRIES = "SORT_COUNTRIES";
 export const SELECT_COUNTRIES = "SELECT_COUNTRIES";
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
 
 const endpointURL = "http://localhost:3001/";
 
@@ -17,6 +18,22 @@ export const getAllCountries = () => {
 
       return dispatch({
         type: GET_ALL_COUNTRIES,
+        payload: data,
+      });
+    } catch (error) {
+      console.log("Action - Error:", error.response);
+      alert(error.message);
+    }
+  };
+};
+
+export const getActivitiesNames = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpointURL + "activities");
+
+      return dispatch({
+        type: GET_ACTIVITIES,
         payload: data,
       });
     } catch (error) {

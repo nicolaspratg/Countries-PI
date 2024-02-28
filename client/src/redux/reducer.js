@@ -1,5 +1,6 @@
 import {
   FILTER_BY_CONTINENT,
+  GET_ACTIVITIES,
   GET_ALL_COUNTRIES,
   SEARCH_COUNTRY,
   SELECT_COUNTRIES,
@@ -12,6 +13,7 @@ const initialState = {
   filteredResults: [],
   searchResults: [],
   selectedCountries: null,
+  activityNames: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -112,6 +114,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         selectedCountry: payload,
+      };
+    case GET_ACTIVITIES:
+      return {
+        ...state,
+        activityNames: payload,
       };
     default:
       return state; // default return state unchanged
